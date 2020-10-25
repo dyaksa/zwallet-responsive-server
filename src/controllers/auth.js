@@ -45,9 +45,14 @@ module.exports = {
                     role,
                     pin
                 }, process.env.SECRET_KEY)
+                let roles = 'user'
+                if(role == 6) {
+                    roles = 'admin'
+                }
                 response(res, 200, { 
                     message: 'Auth Success', 
-                    token
+                    token,
+                    roles
                 })
             } else {
                 res.status(401).send({
