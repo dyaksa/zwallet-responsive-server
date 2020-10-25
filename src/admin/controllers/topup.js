@@ -1,4 +1,4 @@
-const topupModel = require('../models-admin/topup')
+const topupModel = require('../models/topup')
 
 module.exports = {
     getAllTopUp: async function(req, res) {

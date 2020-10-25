@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const topupController = require('../contollers-admin/topup')
+const topupController = require('../controllers/topup')
 const { authentication, authorization } = require('../../middlewares/auth')
 
 router
