@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
-const userModels = require("../models-admin/user");
-const { checkUser } = require("../model/auth");
+const userModels = require("../models/user");
+const { checkUser } = require("../../models/auth");
 const { response } = require("../../helpers");
 
 module.exports = {

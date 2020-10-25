@@ -1,6 +1,6 @@
 const db = require("../../config/mysql");
 
-modeule.exports = {
+module.exports = {
   getAllUser: (query, page, limit) => {
     return new Promise((resolve, reject) => {
       if (!limit) {

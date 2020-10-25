@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const adminController = require("../admin/controllers-admin/user");
-const { authentication, authorization } = require("../middlewares/auth");
-const upload = require("../middlewares/multer");
+const adminController = require("../controllers/user");
+const { authentication, authorization } = require("../../middlewares/auth");
+const upload = require("../../middlewares/multer");
 
 router
   .get("/search", authentication, adminController.searchAllUser)
