@@ -20,12 +20,3 @@ router
 // .use('/topup', topupadmRoutes)
 // .use('/transfer', transferadmRoutes)
 module.exports = router;
-
-/* 
-
-PORT=8000
-DB_HOST=us-cdbr-east-02.cleardb.com
-DB_USER=beafa6c6f1a04e
-DB_PASSWORD=e4db0b54
-DB_NAME=heroku_edf15b710a7f7a7
-*/

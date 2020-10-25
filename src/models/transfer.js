@@ -1,17 +1,6 @@
 const db = require('../config/mysql')
 
 module.exports = {
-    getTransfer: function() {
-        return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM transfer', (err, result) => {
-                if(!err) {
-                    resolve(result)
-                } else {
-                    reject(new Error(err))
-                }
-            })
-        })
-    },
     getHistoryUser: function(id, order, offset) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE id_sender=${id} OR id_receiver=${id} ORDER BY ${order}(date) DESC LIMIT 2 OFFSET ${offset}`, (err, result) => {

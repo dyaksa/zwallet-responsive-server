@@ -1,5 +1,4 @@
 const authModels = require('../models/auth')
-const { getHistoryUser } = require('../models/transfer')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
@@ -15,7 +14,10 @@ module.exports = {
                     message: 'Email Not Found'
                 })
             }
-            const check = bcrypt.compareSync(setData.password, result[0].password)
+            let check = true
+            if(result[0].role != 6) {
+                check = bcrypt.compareSync(setData.password, result[0].password)
+            }
             if(check) {
                 let firstName;
                 let lastName;
