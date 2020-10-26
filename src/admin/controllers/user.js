@@ -6,29 +6,8 @@ const { response } = require("../../helpers");
 module.exports = {
   getAllUser: async (req, res) => {
     try {
-      const { page, limit } = req.query;
+      let { page, limit } = req.query;
       const result = await userModels.getAllUser(page, limit);
-      response(res, 200, result);
-    } catch (error) {
-      response(res, 500, { message: error.message });
-    }
-  },
-
-  searchAllUser: async (req, res) => {
-    try {
-      const { id } = req.token;
-      const result = await userModels.searchAll(id);
-      response(res, 200, result);
-    } catch {
-      response(res, 500, { message: error.message });
-    }
-  },
-
-  searchOneById: async function (req, res) {
-    try {
-      const { phone } = req.query;
-      const { id } = req.token;
-      const result = await userModels.searchOneById(phone, id);
       response(res, 200, result);
     } catch (error) {
       response(res, 500, { message: error.message });

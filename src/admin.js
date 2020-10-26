@@ -4,6 +4,6 @@ const authRoutes = require("./routes/auth");
 const topupRoutes = require("./admin/routes/topup");
 const adminRoutes = require("./admin/routes/user");
 
-router.use("/topup", topupRoutes).use("/", adminRoutes);
+router.use("/topup", topupRoutes).use("/user", adminRoutes);
 
 module.exports = router;
