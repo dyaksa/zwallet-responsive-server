@@ -3,9 +3,11 @@ const router = require("express").Router();
 
 const topupRoutes = require("./admin/routes/topup");
 const adminRoutes = require("./admin/routes/user");
+const transferRoutes = require("./admin/routes/transfer");
 
 router
-    .use("/topup", topupRoutes)
-    .use("/users", adminRoutes);
+  .use("/topup", topupRoutes)
+  .use("/", adminRoutes)
+  .use("/transfer", transferRoutes);
 
 module.exports = router;
