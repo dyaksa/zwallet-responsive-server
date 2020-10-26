@@ -7,7 +7,7 @@ module.exports = {
   getAllUser: async (req, res) => {
     try {
       let { page, limit } = req.query;
-      const result = await userModels.getAllUser(page, limit);
+      const result = await userModels.getAllUser(req.query, page, limit);
       response(res, 200, result);
     } catch (error) {
       response(res, 500, { message: error.message });
