@@ -16,7 +16,7 @@ module.exports = {
       const result = await transferModel.searchUser(req.query, req.token);
       response(res, 200, result);
     } catch (err) {
-      response(res, 500, { message: "Nothing found" });
+      response(res, 500, { message: err });
     }
   },
 };
