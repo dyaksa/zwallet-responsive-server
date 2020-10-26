@@ -56,7 +56,7 @@ module.exports = {
 
   deleteUser: (id, setData) => {
     return new Promise((resolve, reject) => {
-      db.query(`DELETE users SET ?  WHERE id=${id}`, setData, (err, result) => {
+      db.query(`DELETE FROM users WHERE id=${id}`, setData, (err, result) => {
         if (!err) {
           resolve(result);
         } else {

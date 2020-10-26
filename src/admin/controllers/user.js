@@ -52,7 +52,6 @@ module.exports = {
 
       const result = await userModels.editUser(id, setData);
       if (result.affectedRows) {
-        const result = await userModels.getUserLogin(req.token.id);
         res.status(201).send({
           message: `${Object.keys(req.file || req.body)} successfully edited`,
           data: result,

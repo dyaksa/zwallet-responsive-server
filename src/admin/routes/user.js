@@ -7,5 +7,5 @@ router
   .get("/search/query", authentication, adminController.searchByName)
   .get("/", authentication, authorization, adminController.getAllUser)
   .patch("/", upload, authentication, adminController.editUser)
-  .delete("/", authentication, adminController.deleteUser);
+  .delete("/:id", authentication, adminController.deleteUser);
 module.exports = router;
