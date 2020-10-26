@@ -10,4 +10,8 @@ router
   .get("/", authentication, authorization, adminController.getAllUser)
   .patch("/", upload, authentication, authorization, adminController.editUser);
 
+  .get("/search/query", authentication, adminController.searchByName)
+  .get("/", authentication, authorization, adminController.getAllUser)
+  .patch("/", upload, authentication, adminController.editUser)
+  .delete("/:id", authentication, adminController.deleteUser);
 module.exports = router;
