@@ -6,29 +6,8 @@ const { response } = require("../../helpers");
 module.exports = {
   getAllUser: async (req, res) => {
     try {
-      const { page, limit } = req.query;
-      const result = await userModels.getAllUser(page, limit);
-      response(res, 200, result);
-    } catch (error) {
-      response(res, 500, { message: error.message });
-    }
-  },
-
-  searchAllUser: async (req, res) => {
-    try {
-      const { id } = req.token;
-      const result = await userModels.searchAll(id);
-      response(res, 200, result);
-    } catch {
-      response(res, 500, { message: error.message });
-    }
-  },
-
-  searchOneById: async function (req, res) {
-    try {
-      const { phone } = req.query;
-      const { id } = req.token;
-      const result = await userModels.searchOneById(phone, id);
+      let { page, limit } = req.query;
+      const result = await userModels.getAllUser(req.query, page, limit);
       response(res, 200, result);
     } catch (error) {
       response(res, 500, { message: error.message });
@@ -73,7 +52,6 @@ module.exports = {
 
       const result = await userModels.editUser(id, setData);
       if (result.affectedRows) {
-        const result = await userModels.getUserLogin(req.token.id);
         res.status(201).send({
           message: `${Object.keys(req.file || req.body)} successfully edited`,
           data: result,
