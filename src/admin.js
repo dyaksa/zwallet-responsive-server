@@ -7,7 +7,7 @@ const transferRoutes = require("./admin/routes/transfer");
 
 router
   .use("/topup", topupRoutes)
-  .use("/", adminRoutes)
+  .use("/users", adminRoutes)
   .use("/transfer", transferRoutes);
 
 module.exports = router;
