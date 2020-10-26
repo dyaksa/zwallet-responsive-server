@@ -43,8 +43,19 @@ module.exports = {
     },
     getUserLogin: async function(req, res) {
         try {
-            const { id, firstName, lastName } = req.token
+            const { id, name } = req.token
             const result = await userModels.getUserLogin(id)
+            let firstName;
+            let lastName;
+            if(result[0].name.split(' ').length > 1) {
+                const separateName = result[0].name.split(' ')
+                const [first, ...last] = separateName
+                firstName = first
+                lastName = last.join(' ')
+            } else {
+                firstName = result[0].name
+                lastName = ' '
+            }
             result[0].firstName = firstName
             result[0].lastName = lastName
             response(res, 200, result)
