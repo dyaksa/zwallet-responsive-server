@@ -1,9 +1,11 @@
 const router = require("express").Router();
-const authRoutes = require("./routes/auth");
+// const authRoutes = require("./routes/auth");
 
 const topupRoutes = require("./admin/routes/topup");
 const adminRoutes = require("./admin/routes/user");
 
-router.use("/topup", topupRoutes).use("/", adminRoutes);
+router
+    .use("/topup", topupRoutes)
+    .use("/users", adminRoutes);
 
 module.exports = router;
