@@ -14,6 +14,16 @@ module.exports = {
     }
   },
 
+  getById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await userModels.getById(id);
+      response(res, 200, result);
+    } catch (error) {
+      response(res, 500, { message: error.message });
+    }
+  },
+
   searchByName: async function (req, res) {
     try {
       const { q } = req.query;
