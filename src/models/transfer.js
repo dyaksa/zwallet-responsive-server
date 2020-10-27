@@ -23,6 +23,17 @@ module.exports = {
             })
         })
     },
+    getHistoryToday: function(id) {
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) = CURRENT_DATE() AND id_sender=${id} OR id_receiver=${id}`, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
     postTransfer: function(phone, setData) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT id AS id_receiver, name AS receiver, photo FROM users WHERE phone=${phone}`, (err, result) => {
@@ -40,17 +51,6 @@ module.exports = {
                             reject(new Error(err))
                         }
                     })
-                }
-            })
-        })
-    },
-    deleteTransfer: function(id, id_transfer) {
-        return new Promise((resolve, reject) => {
-            db.query(`DELETE FROM transfer WHERE id_sender=${id} OR id_receiver=${id} AND id=${id_transfer}`, (err, result) => {
-                if(!err) {
-                    resolve(result)
-                } else {
-                    reject(new Error(err))
                 }
             })
         })
