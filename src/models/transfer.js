@@ -3,7 +3,7 @@ const db = require('../config/mysql')
 module.exports = {
     getHistoryUser: function(id, order, offset) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE id_sender=${id} OR id_receiver=${id} ORDER BY ${order}(date) DESC LIMIT 2 OFFSET ${offset}`, (err, result) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE id_sender=${id} OR id_receiver=${id} ORDER BY ${order}(date) DESC`, (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {
@@ -26,6 +26,17 @@ module.exports = {
     getHistoryToday: function(id) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) = CURRENT_DATE() AND id_sender=${id} OR id_receiver=${id}`, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    getHistoryByFilter: function(start, end, id) {
+        return new Promise((resolve, reject) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) BETWEEN ${start} AND ${end} AND id_receiver=${id} OR id_sender=${id}`, (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {

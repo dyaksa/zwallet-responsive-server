@@ -5,14 +5,8 @@ module.exports = {
     getHistoryUser: async function(req, res) {
         try {
             const { id } = req.token
-            let { order, page } = req.query
-            if(!page) {
-                page = 1
-            } else {
-                parseInt(page)
-            }
-            const offset = (2 * page) - 2
-            const result = await transferModel.getHistoryUser(id, order, offset)
+            let { order } = req.query
+            const result = await transferModel.getHistoryUser(id, order)
             response(res, 200, result)
         } catch (error) {
             res.status(500).send({
@@ -35,6 +29,16 @@ module.exports = {
         try {
             const { id } = req.token
             const result = await transferModel.getHistoryToday(id)
+            response(res, 200, result)
+        } catch (error) {
+            response(res, 500, { message: error.message })
+        }
+    },
+    getHistoryByFilter: async function(req, res) {
+        try {
+            const { id } = req.token
+            const { start, end } = req.body
+            const result = await transferModel.getHistoryByFilter(start, end, id)
             response(res, 200, result)
         } catch (error) {
             response(res, 500, { message: error.message })
