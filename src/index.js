@@ -5,6 +5,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const transferRoutes = require("./routes/transfer");
 const topupRoutes = require("./routes/topup");
+const acceptedRoutes = require("./routes/accepted");
 
 // Admin
 // const adminRoutes = require('./admin/routes-admin/admin')
@@ -15,7 +16,8 @@ router
   .use("/auth", authRoutes)
   .use("/users", userRoutes)
   .use("/transfer", transferRoutes)
-  .use("/topup", topupRoutes);
+  .use("/topup", topupRoutes)
+  .use("/accepted",acceptedRoutes);
 // .use('/admin', adminRoutes)
 // .use('/topup', topupadmRoutes)
 // .use('/transfer', transferadmRoutes)
