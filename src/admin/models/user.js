@@ -26,6 +26,17 @@ module.exports = {
       });
     });
   },
+  getById: (id, setData) => {
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT * FROM users WHERE id=${id}`, setData, (err, result) => {
+        if (!err) {
+          resolve(result);
+        } else {
+          reject(new Error(err));
+        }
+      });
+    });
+  },
 
   searchByName: (id, name) => {
     return new Promise((resolve, reject) => {
