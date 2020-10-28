@@ -1,4 +1,5 @@
 const db = require('../config/mysql')
+const service = require('../services/service');
 
 module.exports = {
     getAllTopUp: function() {
@@ -11,5 +12,18 @@ module.exports = {
                 }
             })
         })
-    }
+    },
+    
+    //topup charge
+    charge: function(amount,data){
+        const { id } = req.token;
+        return new Promise((resolve,reject) => {
+            services.postCharge(amount,data)
+            .then(results => {
+                resolve(results);
+            }).catch(err => {
+                reject(new Error(err));
+            })
+        })
+    },
 }
