@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const transferController = require('../controllers/transfer')
-const { authentication, authorization } = require('../middlewares/auth')
+const { authentication } = require('../middlewares/auth')
 
 router
     .get('/history/all', authentication, transferController.getAllHistoryUser)
