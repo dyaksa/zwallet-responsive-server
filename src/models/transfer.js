@@ -45,6 +45,28 @@ module.exports = {
             })
         })
     },
+    updateHistorySender: function(data, id) {
+        return new Promise((resolve, reject) => {
+            db.query(`UPDATE transfer SET ? WHERE id_sender=${id}`, data, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    updateHistoryReceiver: function(data, id) {
+        return new Promise((resolve, reject) => {
+            db.query(`UPDATE transfer SET ? WHERE id_receiver=${id}`, data, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
     postTransfer: function(phone, setData) {
         return new Promise((resolve, reject) => {
             db.query(`SELECT id AS id_receiver, name AS receiver, photo FROM users WHERE phone=${phone}`, (err, result) => {

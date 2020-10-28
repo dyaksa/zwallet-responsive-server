@@ -26,12 +26,12 @@ module.exports = {
                 const successBalance = parseInt(status.gross_amount);
                 const total = currentBalance + successBalance;
                 await userModel.editUser(id,{balance: total});
-                res.redirect(`${process.env.API_URI}/accepted/success`);
+                res.redirect(`http://localhost:3000/dashboard`);
             }else{
-                res.redirect(`${process.env.API_URI}/accepted/failed`);
+                res.redirect(`http://localhost:3000/topup`).send('Topup Failed');
             }
         }catch(err){
-            res.redirect(`${process.env.API_URI}/accepted/failed`);
+            res.redirect(`http://localhost:3000/topup`).send('Topup Failed');
         }
     }
 }
