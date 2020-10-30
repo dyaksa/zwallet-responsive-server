@@ -25,7 +25,7 @@ module.exports = {
     },
     getHistoryToday: function(id) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) = CURRENT_DATE() AND id_sender=${id} OR id_receiver=${id}`, (err, result) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender, date FROM transfer WHERE DATE(date) = CURDATE() AND id_receiver=${id} OR DATE(date) = CURDATE() AND id_sender=${id}`, (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {
@@ -36,7 +36,29 @@ module.exports = {
     },
     getHistoryByFilter: function(start, end, id) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) BETWEEN ${start} AND ${end} AND id_receiver=${id} OR id_sender=${id}`, (err, result) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE DATE(date) BETWEEN '${start} AND ${end}' AND id_receiver=${id} OR DATE(date) BETWEEN '${start}' AND '${end}' AND id_sender=${id}`, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    updateHistorySender: function(data, id) {
+        return new Promise((resolve, reject) => {
+            db.query(`UPDATE transfer SET ? WHERE id_sender=${id}`, data, (err, result) => {
+                if(!err) {
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
+    updateHistoryReceiver: function(data, id) {
+        return new Promise((resolve, reject) => {
+            db.query(`UPDATE transfer SET ? WHERE id_receiver=${id}`, data, (err, result) => {
                 if(!err) {
                     resolve(result)
                 } else {

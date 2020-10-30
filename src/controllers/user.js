@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const userModels = require('../models/user')
 const { checkUser } = require('../models/auth')
+const { updateHistoryReceiver, updateHistorySender} = require('../models/transfer')
 const { response } = require('../helpers')
 
 module.exports = {
@@ -70,6 +71,13 @@ module.exports = {
 
             if(req.file) {
                 setData.photo = req.file.filename
+                await updateHistorySender({photo_sender: req.file.filename}, id)
+                await updateHistoryReceiver({ photo: req.file.filename}, id)
+            }
+
+            if(req.body.name) {
+                await updateHistorySender({sender: req.body.name}, id)
+                await updateHistoryReceiver({receiver: req.body.name}, id)
             }
 
             if(setData.currPassword && setData.password) {

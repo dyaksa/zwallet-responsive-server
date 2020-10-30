@@ -25,16 +25,6 @@ module.exports = {
     }
   },
 
-  getById: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const result = await userModels.getById(id);
-      response(res, 200, result);
-    } catch (error) {
-      response(res, 500, { message: error.message });
-    }
-  },
-
   searchByName: async function (req, res) {
     try {
       const { q } = req.query;
@@ -48,27 +38,17 @@ module.exports = {
 
   editUser: async (req, res) => {
     try {
-      const { id } = req.token;
+      const { id } = req.params;
       const setData = req.body;
 
       if (req.file) {
         setData.photo = req.file.filename;
       }
 
-      if (setData.currPassword && setData.password) {
-        const result = await checkUser(req.token);
-        const check = bcrypt.compareSync(
-          setData.currPassword,
-          result[0].password
-        );
-        if (check) {
-          const salt = bcrypt.genSaltSync(10);
-          const hash = bcrypt.hashSync(setData.password, salt);
-          setData.password = hash;
-          delete setData.currPassword;
-        } else {
-          res.sendStatus(403);
-        }
+      if (setData.password) {
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(setData.password, salt);
+        setData.password = hash;
       }
 
       const result = await userModels.editUser(id, setData);

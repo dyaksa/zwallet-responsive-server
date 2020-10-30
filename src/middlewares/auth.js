@@ -11,6 +11,7 @@ module.exports = {
         if(!token) {
             return res.sendStatus(403)
         }
+
     
         jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
             if(err) {

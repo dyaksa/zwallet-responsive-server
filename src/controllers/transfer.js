@@ -37,7 +37,7 @@ module.exports = {
     getHistoryByFilter: async function(req, res) {
         try {
             const { id } = req.token
-            const { start, end } = req.body
+            const { start, end } = req.query
             const result = await transferModel.getHistoryByFilter(start, end, id)
             response(res, 200, result)
         } catch (error) {
