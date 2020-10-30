@@ -4,10 +4,21 @@ const { checkUser } = require("../../models/auth");
 const { response } = require("../../helpers");
 
 module.exports = {
+  // getAllUser: async (req, res) => {
+  //   try {
+  //     let { page, limit } = req.query;
+  //     const result = await userModels.getAllUser(req.query, page, limit);
+  //     response(res, 200, result);
+  //   } catch (error) {
+  //     response(res, 500, { message: error.message });
+  //   }
+  // },
+
   getAllUser: async (req, res) => {
     try {
-      let { page, limit } = req.query;
-      const result = await userModels.getAllUser(req.query, page, limit);
+      // const { id } = req.token;
+      // const { query } = req.query;
+      const result = await userModels.getAllUser(req.query);
       response(res, 200, result);
     } catch (error) {
       response(res, 500, { message: error.message });
