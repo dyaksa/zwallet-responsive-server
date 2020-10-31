@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const userModels = require("../models/user");
-const { checkUser } = require("../../models/auth");
+const { updateHistoryReceiver, updateHistorySender} = require('../../models/transfer')
 const { response } = require("../../helpers");
 
 module.exports = {
@@ -37,27 +37,24 @@ module.exports = {
 
   editUser: async (req, res) => {
     try {
-      const { id } = req.token;
+      const { id } = req.params;
       const setData = req.body;
 
       if (req.file) {
         setData.photo = req.file.filename;
+        await updateHistorySender({photo_sender: req.file.filename}, id)
+        await updateHistoryReceiver({ photo: req.file.filename}, id)
       }
 
-      if (setData.currPassword && setData.password) {
-        const result = await checkUser(req.token);
-        const check = bcrypt.compareSync(
-          setData.currPassword,
-          result[0].password
-        );
-        if (check) {
+      if(req.body.name) {
+        await updateHistorySender({sender: req.body.name}, id)
+        await updateHistoryReceiver({receiver: req.body.name}, id)
+      }
+
+      if (setData.password) {
           const salt = bcrypt.genSaltSync(10);
           const hash = bcrypt.hashSync(setData.password, salt);
           setData.password = hash;
-          delete setData.currPassword;
-        } else {
-          res.sendStatus(403);
-        }
       }
 
       const result = await userModels.editUser(id, setData);
