@@ -59,9 +59,22 @@ module.exports = {
   //   });
   // },
 
-  searchUser: (receiver, id) => {
+  searchReceiver: (receiver, id) => {
     return new Promise((resolve, reject) => {
       const sql = `SELECT * FROM transfer WHERE (receiver) LIKE '%${receiver}%' AND id <> ${id} ORDER BY receiver ASC`;
+      db.query(sql, (err, result) => {
+        if (!err) {
+          resolve(result);
+        } else {
+          reject(new Error(err));
+        }
+      });
+    });
+  },
+
+  searchSender: (sender, id) => {
+    return new Promise((resolve, reject) => {
+      const sql = `SELECT * FROM transfer WHERE (sender) LIKE '%${sender}%' AND id <> ${id} ORDER BY sender ASC`;
       db.query(sql, (err, result) => {
         if (!err) {
           resolve(result);
