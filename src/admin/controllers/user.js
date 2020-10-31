@@ -6,18 +6,7 @@ const { response } = require("../../helpers");
 module.exports = {
   getAllUser: async (req, res) => {
     try {
-      let { page, limit } = req.query;
-      const result = await userModels.getAllUser(req.query, page, limit);
-      response(res, 200, result);
-    } catch (error) {
-      response(res, 500, { message: error.message });
-    }
-  },
-
-  getById: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const result = await userModels.getById(id);
+      const result = await userModels.getAllUser(req.query);
       response(res, 200, result);
     } catch (error) {
       response(res, 500, { message: error.message });
@@ -52,9 +41,9 @@ module.exports = {
       }
 
       if (setData.password) {
-          const salt = bcrypt.genSaltSync(10);
-          const hash = bcrypt.hashSync(setData.password, salt);
-          setData.password = hash;
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(setData.password, salt);
+        setData.password = hash;
       }
 
       const result = await userModels.editUser(id, setData);
