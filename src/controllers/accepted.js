@@ -11,14 +11,14 @@ module.exports = {
         })
     },
 
-    failed: async function(res,res){
+    failed: async function(req,res){
         res.status(403).send({
             success: false,
             message: "forbidden"
         })
     },
 
-    accepted: async function(req,res){
+    accepted: async function(req, res){
         try {
             const {id, order_id, name} = req.query;
             const status = await service.getStatus(order_id);
