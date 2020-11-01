@@ -77,7 +77,7 @@ module.exports = {
                     recipient_name: `${data.name}`
                   },
                   callbacks: {
-                    finish: `${process.env.API_URI}/accepted/?id=${data.id}&`
+                    finish: `${process.env.API_URI}/accepted/?id=${data.id}&name=${data.name}&`
                   },
                   expiry: {
                     start_time: `${newDate} +0700`,

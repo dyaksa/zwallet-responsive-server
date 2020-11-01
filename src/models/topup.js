@@ -13,6 +13,19 @@ module.exports = {
             })
         })
     },
+
+    //add transactions data topup 
+    addTransactionsData: function(data){
+        return new Promise((resolve,reject) => {
+            db.query("INSERT INTO transactions SET ?", data, (err, result) => {
+                if(!err){
+                    resolve(result);
+                }else{
+                    reject(new Error(err));
+                }
+            })
+        });
+    },
     
     //topup charge
     charge: function(amount,data){
