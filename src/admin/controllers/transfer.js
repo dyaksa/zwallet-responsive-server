@@ -28,8 +28,7 @@ module.exports = {
   searchReceiver: async function (req, res) {
     try {
       const { q } = req.query;
-      const { id } = req.token;
-      const result = await transferModel.searchReceiver(q, id);
+      const result = await transferModel.searchReceiver(q);
       response(res, 200, result);
     } catch (err) {
       response(res, 500, { message: err.message });
@@ -39,8 +38,7 @@ module.exports = {
   searchSender: async function (req, res) {
     try {
       const { q } = req.query;
-      const { id } = req.token;
-      const result = await transferModel.searchSender(q, id);
+      const result = await transferModel.searchSender(q);
       response(res, 200, result);
     } catch (err) {
       response(res, 500, { message: err.message });

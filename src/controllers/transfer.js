@@ -18,6 +18,7 @@ module.exports = {
         try {
             const { id } = req.token
             const result = await transferModel.getAllHistoryUser(id)
+            console.log(result)
             response(res, 200, result)       
         } catch (error) {
             res.status(500).send({

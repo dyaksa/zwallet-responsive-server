@@ -89,7 +89,9 @@ module.exports = {
                     setData.password = hash
                     delete setData.currPassword
                 } else {
-                    res.sendStatus(403)
+                    res.status(403).send({
+                        message: `Invalid Password`
+                    })
                 }
             }
 
@@ -104,7 +106,9 @@ module.exports = {
             
         } catch (error) {
             console.log(error)
-            res.sendStatus(500)
+            res.status(500).send({
+                message: `${Object.keys(req.file || req.body)} failed to edit`
+            })
         }
     },
     checkPin: async function(req, res) {

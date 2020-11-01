@@ -14,9 +14,17 @@ module.exports = {
     },
     getAllHistoryUser: function(id) {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE id_sender=${id} OR id_receiver=${id}`, (err, result) => {
+            db.query(`SELECT amount, receiver, photo, sender, photo_sender FROM transfer WHERE id_sender=${id} OR id_receiver=${id} ORDER BY DATE(date) DESC`, (err, res) => {
                 if(!err) {
-                    resolve(result)
+                    db.query(`SELECT amount, name FROM transaction WHERE id_user=${id} ORDER BY date DESC`, (error, result) => {
+                        if(!error) {    
+                            const newData = [
+                                ...result,
+                                ...res
+                            ]
+                            resolve(newData)
+                        }
+                    })
                 } else {
                     reject(new Error(err))
                 }
