@@ -34,12 +34,12 @@ module.exports = {
                 const newDataTransactions = {...dataTransactions, amount: status.gross_amount};
                 await topupModel.addTransactionsData(newDataTransactions);
                 await userModel.editUser(id,{balance: total});
-                res.redirect(`http://localhost:3000/dashboard`);
+                res.redirect(`https://zwallet-client.web.app/dashboard`);
             }else{
-                res.redirect(`http://localhost:3000/topup`).send('Topup Failed');
+                res.redirect(`https://zwallet-client.web.app/topup`).send('Topup Failed');
             }
         }catch(err){
-            res.redirect(`http://localhost:3000/topup`).send('Topup Failed');
+            res.redirect(`https://zwallet-client.web.app/topup`).send('Topup Failed');
         }
     }
 }
