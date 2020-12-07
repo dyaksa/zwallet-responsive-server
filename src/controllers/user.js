@@ -109,7 +109,7 @@ module.exports = {
         } catch (error) {
             console.log(error)
             res.status(500).send({
-                message: `${Object.keys(req.file || req.body)} failed to edit`
+                message: `${Object.keys(req.file || req.body)} failed to edit : ${error.message}`
             })
         }
     },
