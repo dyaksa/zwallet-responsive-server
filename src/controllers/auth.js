@@ -84,7 +84,7 @@ module.exports = {
                 response(res, 403, { message: errors })
             }
         } catch (error) {
-            response(res, 500, { message: 'Register Failed'})
+            response(res, 500, { message: `Register Failed : ${error.message}`})
         }
     },
     
