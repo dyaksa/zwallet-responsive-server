@@ -69,7 +69,6 @@ module.exports = {
         try {
             const { id } = req.token
             const setData = req.body
-
             if(req.file) {
                 const image = await cloudinary.uploader.upload(req.file.path);
                 setData.photo = image.secure_url;
